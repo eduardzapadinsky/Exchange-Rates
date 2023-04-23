@@ -1,9 +1,10 @@
 import requests
 from requests import JSONDecodeError
 
-from rest_framework.exceptions import NotFound, ValidationError
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
+from . import service
 
 
 class AverageRateCurrencyDate(APIView):
@@ -20,11 +21,10 @@ class AverageRateCurrencyDate(APIView):
         response = requests.get(url)
         try:
             average_rate = response.json()["rates"][0]["mid"]
-            data = {f"average {code.upper()} exchange rate dated {date}": average_rate}
+            data = {f"the average {code.upper()} exchange rate dated {date}": average_rate}
+            return Response(data)
         except JSONDecodeError:
-            data = response.content
-            raise NotFound(data)
-        return Response(data)
+            service.not_found_raise(response)
 
 
 class AverageRateLastQuotations(APIView):
@@ -53,22 +53,15 @@ class AverageRateLastQuotations(APIView):
                 min_average_rate = min(average_rates)
                 max_average_rate = max(average_rates)
                 data = {
-                    f"average {code.upper()} exchange rate for the last {number} quotations":
+                    f"the average {code.upper()} exchange rate for the last {number} quotations":
                         {"minimum": min_average_rate,
                          "maximum": max_average_rate}
                 }
+                return Response(data)
             except JSONDecodeError:
-                data = response.content
-                raise NotFound(data)
+                service.not_found_raise(response)
         else:
-            if number <= 0:
-                message = "400 BadRequest - Liczba wyników nie może być mniejsza niż 1 / " \
-                          "The number of quotations cannot be less than one"
-            else:
-                message = response.content
-            data = {"detail": message}
-            raise ValidationError(data, code=400)
-        return Response(data)
+            service.bad_request_raise(number, response)
 
 
 class DifferenceRateLastQuotations(APIView):
@@ -88,27 +81,20 @@ class DifferenceRateLastQuotations(APIView):
         url = f"http://api.nbp.pl/api/exchangerates/rates/c/{code}/last/{number}/?format=json"
         response = requests.get(url)
         if 1 <= number <= 255:
-            difference_rates = []
+            max_difference_rate = 0
             try:
                 rates_data = response.json()["rates"]
                 for rate_data in rates_data:
                     bid_rate = rate_data["bid"]
                     ask_rate = rate_data["ask"]
                     difference_rate = round(ask_rate - bid_rate, 4)
-                    difference_rates.append(difference_rate)
-                max_difference_rate = max(difference_rates)
+                    if difference_rate > max_difference_rate:
+                        max_difference_rate = difference_rate
                 data = {
-                    f"biggest {code.upper()} exchange rate difference for the last {number} quotations":
+                    f"the biggest {code.upper()} exchange rate difference for the last {number} quotations":
                         max_difference_rate}
+                return Response(data)
             except JSONDecodeError:
-                data = response.content
-                raise NotFound(data)
+                service.not_found_raise(response)
         else:
-            if number <= 0:
-                message = "400 BadRequest - Liczba wyników nie może być mniejsza niż 1 / " \
-                          "The number of quotations cannot be less than one"
-            else:
-                message = response.content
-            data = {"detail": message}
-            raise ValidationError(data, code=400)
-        return Response(data)
+            service.bad_request_raise(number, response)
