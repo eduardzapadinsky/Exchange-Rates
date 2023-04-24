@@ -26,9 +26,13 @@ Provides exchange rate in dependency for a given currency code, date and number 
    curl http://127.0.0.1:8000/api/exchanges/gbp/10/
   * To query operation 3, run this command (which should have the biggest difference as the returning information):  
    curl http://127.0.0.1:8000/api/exchanges/difference/gbp/10/
+   
+   ![Chrome_01](https://user-images.githubusercontent.com/111561866/234058525-b848d4cb-b629-4d0c-9c05-870c459456af.JPG)
 
 7. Use a browser with the Swagger UI for the same functionality as above:
    http://127.0.0.1:8000/api/swagger/
+   
+   ![Chrome_02](https://user-images.githubusercontent.com/111561866/234058595-7f98e5e6-c58b-45cc-bc86-0b5018bb3656.JPG)
 
 8. Run tests with different exception handling in exchange_rates folder:
    python manage.py test rates_api
