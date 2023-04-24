@@ -2,12 +2,12 @@ from django.urls import path
 
 from . import views
 
-app_name = "api"
+app_name = "rates-api"
 urlpatterns = [
     path("difference/<str:code>/<int:number>/", views.DifferenceRateLastQuotations.as_view(),
-         name="DifferenceRate"),
+         name="difference-rate"),
     path("<str:code>/<int:number>/", views.AverageRateLastQuotations.as_view(),
-         name="LastQuotations"),
+         name="last-quotations"),
     path("<str:code>/<str:date>/", views.AverageRateCurrencyDate.as_view(),
-         name="CurrencyDate"),
+         name="currency-date"),
 ]
