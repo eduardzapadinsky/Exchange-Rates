@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rates_api.apps.RatesApiConfig',
 
     'rest_framework',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
