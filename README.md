@@ -22,9 +22,9 @@ Provides exchange rate in dependency for a given currency code, date and number 
   * To query operation 1, run this command (which should have the value 5.2768 as the returning information):  
    curl http://127.0.0.1:8000/api/exchanges/gbp/2023-01-02/
   * To query operation 2, run this command (which should have the minimum and maximum value as the returning
-   information):
+   information):  
    curl http://127.0.0.1:8000/api/exchanges/gbp/10/
-  * To query operation 3, run this command (which should have the biggest difference as the returning information):
+  * To query operation 3, run this command (which should have the biggest difference as the returning information):  
    curl http://127.0.0.1:8000/api/exchanges/difference/gbp/10/
 
 7. Use a browser with the Swagger UI for the same functionality as above:
