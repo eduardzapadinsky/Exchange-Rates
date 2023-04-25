@@ -10,19 +10,20 @@ Provides exchange rate in dependency for a given currency code, date and number 
 
 1. Download or clone
 2. Run using Docker:  
+  
    docker-compose up --build  
   
    or  
   
    Run manually:  
-  * Create environment:
-   python -m venv venv
-  * Activate environment:
-   source venv/Scripts/activate
-  * Install requirements in source folder:
-   pip install -r requirements.txt
-  * Run app in source folder:
-   python manage.py runserver 8000
+  * Create environment:  
+   python -m venv venv  
+  * Activate environment:  
+   source venv/Scripts/activate  
+  * Install requirements in source folder:  
+   pip install -r requirements.txt  
+  * Run app in source folder:  
+   python manage.py runserver 8000  
 
 3. Use browser (with in-build Django API interface) or command line for the next query examples:
   * To query operation 1, run this command (which should have the value 5.2768 as the returning information):  
