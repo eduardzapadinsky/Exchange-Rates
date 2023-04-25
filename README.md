@@ -11,15 +11,17 @@ Provides exchange rate in dependency for a given currency code, date and number 
 1. Download or clone
 2. Run using Docker:  
    docker-compose up --build  
+  
    or  
+  
    Run manually:  
   * Create environment:
    python -m venv venv
   * Activate environment:
    source venv/Scripts/activate
-  * Install requirements:
+  * Install requirements in source folder:
    pip install -r requirements.txt
-  * Run app in exchange_rates folder:
+  * Run app in source folder:
    python manage.py runserver 8000
 
 3. Use browser (with in-build Django API interface) or command line for the next query examples:
@@ -38,5 +40,5 @@ Provides exchange rate in dependency for a given currency code, date and number 
    
    ![Chrome_02](https://user-images.githubusercontent.com/111561866/234058595-7f98e5e6-c58b-45cc-bc86-0b5018bb3656.JPG)
 
-5. Run tests with different exception handling in exchange_rates folder:
+5. Run tests with different exception handling in source folder:
    python manage.py test rates_api
