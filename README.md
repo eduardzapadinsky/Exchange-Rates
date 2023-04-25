@@ -9,10 +9,10 @@ Provides exchange rate in dependency for a given currency code, date and number 
 ## Install
 
 1. Download or clone
-2. Run using Docker:
-   docker-compose up --build
-   or
-   Run manually:
+2. Run using Docker:  
+   docker-compose up --build  
+   or  
+   Run manually:  
   * Create environment:
    python -m venv venv
   * Activate environment:
